@@ -1,0 +1,116 @@
+grammar ch.raiffeisen.ipricer.definition.DefinitionDSL with org.eclipse.xtext.common.Terminals
+
+generate definitionDSL "http://www.raiffeisen.ch/ipricer/definition/DefinitionDSL"
+
+
+
+Definition:
+
+	'Definition' methodName=ID guiLabelMethod=STRING guiLabelParent=STRING guiLabelChild=STRING '{'
+	data=Data
+	initSection=InitSection
+	typeMaskSection=TypeMaskSection
+	underlyingListSection=UnderlyingListSection
+	underlyingMaskSection=UnderlyingMaskSection
+	optionListSection=OptionListSection
+	optionListLabelSection=OptionListLabelSection
+	optionMaskSection=OptionMaskSection
+	'}'
+	eventuellTclProcedures+=(ID|ANY_OTHER)*
+;
+
+Data:
+	'Data' '{'
+	(DEF_COMMENT | fieldDefinitions +=FieldDefinition)+
+	'}'
+;
+
+InitSection:
+	'Init' '{'
+	( DEF_COMMENT | initDefinitions +=InitDefinition)*
+	'}'
+;
+
+TypeMaskSection:
+	'TypeMask' '{'
+	( DEF_COMMENT | typeMaskDefinitions +=TypeMaskDefinition)*
+	'}'
+;
+
+UnderlyingMaskSection:
+	'UnderlyingMask' '{'
+	( DEF_COMMENT | underlyingMaskDefinitions +=TypeMaskDefinition)*
+	'}'
+;
+
+UnderlyingListSection:
+	'UnderlyingList' '{'
+	( DEF_COMMENT | underlyingListDefinitions +=UnderlyingListDefintion)*
+	'}'
+;
+
+OptionListSection:
+	'OptionList' '{'
+	( DEF_COMMENT | optionListDefinitions +=UnderlyingListDefintion)*
+	'}'
+;
+
+OptionListLabelSection:
+	'OptionListLabel' '{'
+	( DEF_COMMENT ) *
+	'}'
+;
+
+OptionMaskSection:
+	'OptionMask' '{'
+	( DEF_COMMENT | optionMaskDefinitions +=TypeMaskDefinition)*
+	'}'
+;
+
+UnderlyingListDefintion:
+	'AddColumn' id=ID '-width' width=INT ('-title' title=STRING)*
+;
+
+TypeMaskDefinition:
+	'AddColumn' id=ID '-row' row=INT '-col' col=INT '-width' width=INT ('-sep')*
+;
+
+InitDefinition:
+	'InitField' id=ID initValue=STRING
+;
+
+FieldDefinition:
+	fieldType=FIELD_TYPE   id=ID   name=STRING   access=ROLE   recordClass=RECORDCLASS":"fieldName=ID (length=INT)? (options+=Option)*
+;
+
+Option:
+	OptionValproc | OptionStrict | OptionRange | OptionContrib
+;
+
+OptionValproc:
+	valproc="-valproc" tclProc=ID;
+
+OptionStrict:
+	strict?="-strict"
+;
+
+OptionRange:
+	"-range" "[list" min=INT max=INT "]"
+;
+
+OptionContrib:
+	contrib?="-contrib"
+;
+
+
+
+terminal DEF_COMMENT 	: '#' !('\n'|'\r')* ('\r'? '\n')?;
+
+enum FIELD_TYPE:
+	STRING_FIELD = 'StringField' | TIME_FIELD = 'TimeField' | INTEGER_FIELD = 'IntegerField' | PRICE_FIELD = 'PriceField' | DOUBLE_FIELD = 'DoubleField' | DATE_FIELD='DateField'  ;
+
+enum ROLE:
+	RADMIN = 'radmin' | NONE = 'none' | RTRADER = 'rtrader' | SUPERVISOR = 'supervisor';
+
+enum RECORDCLASS:
+	METHOD_READ_ONLY = 'B' | PARENT_READ_ONLY = 'U' | PARENT_READ_WRITE = 'G' | PARENT_READ_REFERENCE = 'R' | CHILD_READ_ONLY= 'D' | CHILD_READ_WRITE = 'P' | CHILD_READ_REFERENCE = 'S';

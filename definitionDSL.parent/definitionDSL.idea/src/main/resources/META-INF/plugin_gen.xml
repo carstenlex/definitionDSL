@@ -1,0 +1,93 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<package
+			uri="http://www.raiffeisen.ch/ipricer/definition/DefinitionDSL"
+			class="ch.raiffeisen.ipricer.definition.definitionDSL.DefinitionDSLPackage"
+		/>
+		<resourceFactory 
+			type="def"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="def"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+		/>
+
+		<lang.setup
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			implementationClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLIdeaSetup"
+		/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<psi.treeChangePreprocessor implementation="ch.raiffeisen.ipricer.definition.idea.lang.psi.DefinitionDSLCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="ch.raiffeisen.ipricer.definition.idea.lang.DefinitionDSLFileTypeFactory"/>
+		<stubElementTypeHolder class="ch.raiffeisen.ipricer.definition.idea.lang.DefinitionDSLElementTypeProvider"/>
+		<lang.ast.factory 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="ch.raiffeisen.ipricer.definition.idea.lang.parser.DefinitionDSLParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="ch.raiffeisen.ipricer.definition.DefinitionDSL" implementationClass="ch.raiffeisen.ipricer.definition.idea.highlighting.DefinitionDSLSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="ch.raiffeisen.ipricer.definition.DefinitionDSL" implementationClass="ch.raiffeisen.ipricer.definition.idea.completion.DefinitionDSLCompletionContributor"/>
+		<pom.declarationSearcher implementation="ch.raiffeisen.ipricer.definition.idea.lang.pom.DefinitionDSLPomDeclarationSearcher"/>
+
+		<lang.psiStructureViewFactory 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
+		<facetType implementation="ch.raiffeisen.ipricer.definition.idea.facet.DefinitionDSLFacetType"/>
+      	<lang.documentationProvider 
+      		language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+      		factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+      	/>
+		<colorSettingsPage implementation="ch.raiffeisen.ipricer.definition.idea.highlighting.DefinitionDSLColorSettingsPage"/>
+		<highlightVisitor implementation="ch.raiffeisen.ipricer.definition.idea.highlighting.DefinitionDSLSemanticHighlightVisitor"/>
+
+		<lang.formatter 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="ch.raiffeisen.ipricer.definition.DefinitionDSL"
+			factoryClass="ch.raiffeisen.ipricer.definition.idea.DefinitionDSLExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
+	</extensions>
+</idea-plugin>
