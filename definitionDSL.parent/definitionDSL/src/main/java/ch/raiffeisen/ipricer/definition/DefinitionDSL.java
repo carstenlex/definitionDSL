@@ -32,8 +32,9 @@ public class DefinitionDSL {
         xtextResourceSet= injector.getInstance(XtextResourceSet.class);
     }
 
-    public GeneratorResponse generateJavaFromDefinition(java.net.URI inputURIforDefintion){
+    public GeneratorResponse generateJavaFromDefinition(java.net.URI inputURIforDefintion, String encoding){
         URI inputURI = URI.createURI(inputURIforDefintion.toString());
+        xtextResourceSet.addLoadOption(XtextResource.OPTION_ENCODING,encoding);
         Resource resource = xtextResourceSet.getResource(inputURI, true);
 
         // Validation
@@ -50,8 +51,9 @@ public class DefinitionDSL {
         return response;
     }
 
-    public DefinitionImpl parseDefinition(java.net.URI inputURIforDefinition){
+    public DefinitionImpl parseDefinition(java.net.URI inputURIforDefinition, String encoding){
         URI inputURI = URI.createURI(inputURIforDefinition.toString());
+        xtextResourceSet.addLoadOption(XtextResource.OPTION_ENCODING,encoding);
         Resource resource = xtextResourceSet.getResource(inputURI, true);
         
         /* Parser besorgen und Root-Element */
