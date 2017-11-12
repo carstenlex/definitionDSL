@@ -220,7 +220,7 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.junit4</artifactId>
-			<version>RELEASE</version>
+			<version>${xtextVersion}</version>
 		</dependency>
 	</dependencies>
 </project>
