@@ -30,8 +30,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.xtext:org.eclipse.xtext.xbase.junit:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.xtext:org.eclipse.xtext.junit4:2.9.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.xtext:org.eclipse.xtext.xbase.junit:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.xtext:org.eclipse.xtext:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.xtext:org.eclipse.xtext.util:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.xtend:org.eclipse.xtend.lib:2.9.2" level="project" />
