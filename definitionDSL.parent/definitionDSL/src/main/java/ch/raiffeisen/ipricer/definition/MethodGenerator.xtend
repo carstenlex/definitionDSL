@@ -130,9 +130,10 @@ class MethodGenerator {
             case FIELD_TYPE::STRING_FIELD : javaType = 'String'
             case FIELD_TYPE::DATE_FIELD : javaType = 'Date'
             case FIELD_TYPE::TIME_FIELD : javaType = 'Time'
-            case FIELD_TYPE::DOUBLE_FIELD : javaType = 'Double'
+            case FIELD_TYPE::DOUBLE_FIELD : javaType = 'Zahl'
             case FIELD_TYPE::INTEGER_FIELD : javaType = 'Integer'
-            case FIELD_TYPE::PRICE_FIELD : javaType = 'Double'
+            case FIELD_TYPE::PRICE_FIELD : javaType = 'Zahl'
+            case FIELD_TYPE::ZAHL_FIELD : javaType = 'Zahl'
             default: javaType = 'String'
         }
 
@@ -184,9 +185,10 @@ class MethodGenerator {
             case FIELD_TYPE::STRING_FIELD : javaType = 'String'
             case FIELD_TYPE::DATE_FIELD : javaType = 'Date'
             case FIELD_TYPE::TIME_FIELD : javaType = 'Time'
-            case FIELD_TYPE::DOUBLE_FIELD : javaType = 'Double'
+            case FIELD_TYPE::DOUBLE_FIELD : javaType = 'Zahl'
             case FIELD_TYPE::INTEGER_FIELD : javaType = 'Integer'
-            case FIELD_TYPE::PRICE_FIELD : javaType = 'Double'
+            case FIELD_TYPE::PRICE_FIELD : javaType = 'Zahl'
+            case FIELD_TYPE::ZAHL_FIELD : javaType = 'Zahl'
             default: javaType = 'String'
         }
 
