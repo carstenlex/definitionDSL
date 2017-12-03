@@ -106,19 +106,15 @@ class ChildGenerator {
 
         switch field.recordClass {
             case RECORDCLASS::CHILD_READ_ONLY : {
-                fieldObject = 'ChildParamField'
-                literalType = 'ParamLiteral'
-            }
-            case RECORDCLASS::PARENT_READ_ONLY : {
                 literalType = 'Param'
                 return   '''«field.id.toLowerCase» = new «javaType»«literalType»(this, m.get«field.id.toLowerCase.toFirstUpper»() );'''
             }
-            case RECORDCLASS::PARENT_READ_WRITE : {
+            case RECORDCLASS::CHILD_READ_WRITE : {
                 literalType = 'Result'
                 return   '''«field.id.toLowerCase» = new «javaType»«literalType»(this, m.get«field.id.toLowerCase.toFirstUpper»() );'''
             }
 
-            case RECORDCLASS::PARENT_READ_REFERENCE : {
+            case RECORDCLASS::CHILD_READ_REFERENCE : {
                 literalType = 'Result'
                 return   '''«field.id.toLowerCase» = new «javaType»«literalType»(this, m.get«field.id.toLowerCase.toFirstUpper»() );'''
             }
@@ -144,25 +140,24 @@ class ChildGenerator {
         }
 
         switch field.recordClass {
-            case RECORDCLASS::CHILD_READ_ONLY : literalType = 'Param'
-            case RECORDCLASS::PARENT_READ_ONLY : literalType = 'Param'
-            case RECORDCLASS::CHILD_READ_WRITE : literalType = 'Result'
-            case RECORDCLASS::PARENT_READ_WRITE : literalType = 'Result'
-            default : literalType = 'Param'
+            case RECORDCLASS::CHILD_READ_ONLY : {
+                literalType = 'Param'
+                return '''
+                private «javaType»«literalType» «field.id.toLowerCase»;
+                public «javaType»«literalType» get«field.id.toLowerCase.toFirstUpper»() { return «field.id.toLowerCase»;}
+                '''
+            }
+            case RECORDCLASS::CHILD_READ_WRITE : {
+                literalType = 'Result'
+                return '''
+                private «javaType»«literalType» «field.id.toLowerCase»;
+                public «javaType»«literalType» get«field.id.toLowerCase.toFirstUpper»() { return «field.id.toLowerCase»;}
+                '''
+            }
+            default : return ''
         }
         //Spezialfall RawParam
-        if (field.recordClass == RECORDCLASS::METHOD_READ_ONLY) {
-            return '''
-            private RawParam<«methodName»Method, ?, ?> «field.id.toLowerCase»;
-            public RawParam<«methodName»Method, ?, ?> get«field.id.toLowerCase.toFirstUpper»() {return «field.id.toLowerCase»; }
 
-            '''
-        }else{
-            return '''
-            private «javaType»«literalType» «field.id.toLowerCase»;
-            public «javaType»«literalType» get«field.id.toLowerCase.toFirstUpper»() { return «field.id.toLowerCase»;}
 
-             '''
-        }
     }
 }
